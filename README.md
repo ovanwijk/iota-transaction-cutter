@@ -5,8 +5,10 @@ This library takes a list of transfer objects and cuts them up in such a way we 
 
 It does this by cutting up the transaction message into different identical transactions (so tag etc stays the same).
 It then prefixes the transactions with 12 Trytes.
+
     Message NR   Current Index   Message Count  Split   Remainder
     99           999             99B            SPLT    AAAAAAAAAAAAA
+    
 
 
 This comes down to a potential 27*27 = 729 Splitted messages within a bundle.
@@ -15,25 +17,6 @@ With each message having a potential 27*27*27 = 19683 Transactions in them.
 
 This is just a means to split up an already encoded tryte message inside a transfer object. It could be placed inside one bundle but it is also possible to send them as a stream in a MAM channel or Flash channel.
 
-    npm install iotatransactioncutter
-
-    var cutter = require("iotatransactioncutter");
-    # iota-transaction-cutter
-Zero value IOTA data transactions can only be 2187 Trytes long. 
-
-This library takes a list of transfer objects and cuts them up in such a way we can easily reconstruct the messages later.
-
-It does this by cutting up the transaction message into different identical transactions (so tag etc stays the same).
-It then prefixes the transactions with 12 Trytes.
-    Message NR   Current Index   Message Count  Split   Remainder
-    99           999             99B            SPLT    AAAAAAAAAAAAA
-
-
-This comes down to a potential 27*27 = 729 Splitted messages within a bundle.
-With each message having a potential 27*27*27 = 19683 Transactions in them.
-19683 * 2175 = 42.810.525 Trytes per message.
-
-This is just a means to split up an already encoded tryte message inside a transfer object. It could be placed inside one bundle but it is also possible to send them as a stream in a MAM channel or Flash channel.
 
     npm install iotatransactioncutter
 
