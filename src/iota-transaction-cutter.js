@@ -69,9 +69,7 @@ export function glueTransactionMessages(transfers = []) {
     var toReturn = [];
     var previousIdentifier = "NEXT";
     var combinedMessage = "";
-    var previousTransfer = null;
-    
-    console.log("Transfer count", transfers.length);
+    var previousTransfer = null;  
     var count = 1;
     transfers.forEach(transfer => {
        
@@ -83,7 +81,7 @@ export function glueTransactionMessages(transfers = []) {
                 previousTransfer = null;
                 combinedMessage = "";
             }
-            console.log(transfer)
+          
             toReturn.push(transfer);
         }else{
              if(transfer.message.substring(SPLIT_MESSAGE_SIGNATURE[0], SPLIT_MESSAGE_SIGNATURE[1] + 1) == "SPLT"){
@@ -109,11 +107,10 @@ export function glueTransactionMessages(transfers = []) {
         count += 1;
     })
     if(previousTransfer !== null && combinedMessage !== ""){
-        console.log("Combining last message: " + combinedMessage.substring(0, 15));
+       
         previousTransfer.message = combinedMessage;        
         toReturn.push(previousTransfer);
     }
-    console.log("Returning", toReturn.length)
     return toReturn;
 
 }

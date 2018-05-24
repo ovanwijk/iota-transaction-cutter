@@ -16,16 +16,27 @@ With each message having a potential 27 * 27 * 27 = 19683 Transactions in them.
 
 This is just a means to split up an already encoded tryte message inside a transfer object. It could be placed inside one bundle but it is also possible to send them as a stream in a MAM channel or Flash channel.
 
+NOTE: It currently only works with bundles that are created by this lib, that means it expects the order of created messages to be correct.
 
-    npm install iotatransactioncutter
+
+#Building
+
+    npm run-script-build
+
+Building produces two files one for nodejs and one for web.
+
+#Installation
+
+     npm install iotatransactioncutter --save
+
+#Usage
 
     var cutter = require("iotatransactioncutter");
     //Create messages that are too long.
     var msg1 = "A".repeat(1000) + "B".repeat(1000) + "C".repeat(1000) + "D".repeat(1000) + "E".repeat(1000) + "F".repeat(1000)
     var msg2 = "G".repeat(3000) + "H".repeat(500) + "I".repeat(100) + "J".repeat(3000) + "K".repeat(2000) + "L".repeat(985)
     var msg3 = "M".repeat(1000) + "N".repeat(2000) + "O".repeat(1000) + "P".repeat(3000) + "Q".repeat(3000) + "R".repeat(3000)
-
-    // MSG is 6000 characters long Math.ceil(6000/2176) = 3 transactions needed to encode.
+    
     //Mock transfer object.
     var transactions = [
         { value: 0, message: msg1 },
@@ -34,7 +45,7 @@ This is just a means to split up an already encoded tryte message inside a trans
         { value: 0, message: msg3 },
     
     ];
-    var cutUpTransctions = cutter.cutTransactionMessages(transactions)
+    var cutUpTransctions = cutter.cutTransactionMessages(transactions);
     var gluedTranscations = cutter.glueTransactionMessages(cutUpTransctions);
     var transactionsEqual = true;
     
